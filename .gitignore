@@ -1,0 +1,117 @@
+# Visual Studio / .NET / C# typical ignores for Visual Studio 2022
+# See https://github.com/github/gitignore/blob/main/VisualStudio.gitignore for reference
+
+# User-specific files
+*.rsuser
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# MonoDevelop / Rider
+*.userprefs
+.idea/
+*.sln.iml
+
+# Build results
+[Bb]in/
+[Oo]bj/
+build/
+publish/
+artifacts/
+
+# Visual Studio Code
+.vscode/
+
+# Visual Studio cache and temporary files
+.vs/
+*.cache
+*.ilk
+*.log
+*.tlog
+*.lastbuildstate
+
+# NuGet
+*.nupkg
+# The packages folder can be restored by NuGet
+packages/
+.nuget/
+.project.lock.json
+project.assets.json
+
+# Dotnet publish directory
+wwwroot/
+dist/
+node_modules/
+
+# Visual Studio profiler
+*.psess
+*.vsp
+*.vspx
+
+# Test results
+[TestRr]esult*/
+TestResults/
+*.trx
+
+# Coverage results
+*.coverage
+*.coveragexml
+coverage/
+
+# SQL Server files
+*.mdf
+*.ldf
+*.ndf
+*.dbmdl
+
+# Entity Framework
+*.Backup
+*.publishsettings
+
+# User-specific JetBrains Rider files
+.idea/
+*.sln.iml
+
+# Resharper
+_ReSharper*/
+*._ReSharper*/
+resharper.local.xml
+resharper.sln.dotSettings
+
+# DotCover
+*.dotCover
+
+# Windows image file caches
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+
+# macOS
+.DS_Store
+
+# Linux
+.*.swp
+
+# Rider or other IDE caches
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# Ignore NuGet packages folder created by older versions of nuget.exe
+packages/
+
+# Ignore local secrets/config (if you use secrets files)
+appsettings.Development.json
+secrets.json
+.env
+
+# Ignore compiled Python files (if mixed repo)
+__pycache__/
+*.py[cod]
+
+# Ensure the repo can still include important config files (uncomment if needed)
+# !/nuget.config
+# !/.editorconfig
