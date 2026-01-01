@@ -30,7 +30,7 @@ class Program
         string firstName = "John ";
         string lastName = "Doe";
         string fullName = firstName + lastName;
-        Console.WriteLine(fullName);
+        //Console.WriteLine(fullName);
 
         int x = 5;
         int y = 6;
