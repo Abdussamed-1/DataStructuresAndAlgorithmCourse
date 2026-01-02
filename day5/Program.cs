@@ -1,8 +1,36 @@
 ﻿using System;
 class Program
 {
+    enum Operators
+    {
+        Add,
+        Subtract,
+        Multiply,
+        Divide
+    }
     static void Main(string[] args)
     {
+        int A = 10; 
+        int B = 20;
+        Operators opp = (Operators)(new Random().Next(0,3));
+        switch (opp)
+        {
+            case Operators.Add:
+                Console.WriteLine($"{A} + {B} = {A+B}");
+                break;
+            case Operators.Subtract:
+                Console.WriteLine($"{A} - {B} = {A - B}");
+                break;
+            case Operators.Multiply:
+                Console.WriteLine($"{A} x {B} = {A * B}");
+                break;
+            case Operators.Divide:
+                Console.WriteLine($"{A} / {B} = {A / B}");
+                break;
+            default:
+                Console.WriteLine("\a Invalid Operator");
+                break;
+        }
         //Evenoroddnumber();
         //absolutevalue();
         //variabletypes();
