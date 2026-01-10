@@ -4,6 +4,22 @@ namespace day9;
 
 public class Solution
 {
+    public string LongestPalindrome(string s)
+    {
+        int start = 0, end = 0;
+        for (int i = 0; i < s.Length; i++)
+        {
+            int len1 = ExpandAroundCenter(s, i, i);
+            int len2 = ExpandAroundCenter(s, i, i + 1);
+            int len = Math.Max(len1, len2);
+            if (len > end - start)
+            {
+                start = i - (len - 1) / 2;
+                end = i + len / 2;
+            }
+        }
+        return s.Substring(start, end - start + 1);
+    }
     public double FindMedianSortedArrays(int[] nums1, int[] nums2)
     {
         int m = nums1.Length;
@@ -37,15 +53,11 @@ public class Solution
         {
             return merged[(m + n) / 2];
         }
-
-
-
     }
+
     public static int LengthOfLongestSubstring(string s)
     {
-        // return wordlength(s);
-
-
+        return wordlength(s);
     }
 
     private static int wordlength(string s)
@@ -60,6 +72,17 @@ public class Solution
             index[s[j]] = j + 1;
         }
         return ans;
+    }
+
+    private int ExpandAroundCenter(string s, int left, int right)
+    {
+        while (left >= 0 && right < s.Length && s[left] == s[right])
+        {
+            left--;
+            right++;
+        }
+        // after loop, right and left are one step beyond the palindrome bounds
+        return right - left - 1;
     }
 }
 
