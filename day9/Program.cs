@@ -4,7 +4,20 @@ namespace day9;
 
 public class Solution
 {
-        public string Convert(string s, int numRows)
+    public int Reverse(int x)
+    {
+        long rev = 0;
+        while (x != 0)
+        {
+            int pop = x % 10;
+            x /= 10;
+            rev = rev * 10 + pop;
+            if (rev > int.MaxValue || rev < int.MinValue)
+                return 0;
+        }
+        return (int)rev;
+    }
+    public string Convert(string s, int numRows)
         {
             int len = s.Length;
             if (numRows == 1 || numRows >= s.Length)
