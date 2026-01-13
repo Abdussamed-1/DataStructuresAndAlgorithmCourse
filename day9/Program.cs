@@ -4,6 +4,28 @@ namespace day9;
 
 public class Solution
 {
+    public int MyAtoi(string s)
+    {
+        int i = 0, sign = 1;
+        long result = 0;
+        while (i < s.Length && s[i] == ' ')
+            i++;
+        if (i < s.Length && (s[i] == '+' || s[i] == '-'))
+        {
+            sign = (s[i] == '-') ? -1 : 1;
+            i++;
+        }
+        while (i < s.Length && char.IsDigit(s[i]))
+        {
+            result = result * 10 + (s[i] - '0');
+            if (sign == 1 && result > int.MaxValue)
+                return int.MaxValue;
+            if (sign == -1 && -result < int.MinValue)
+                return int.MinValue;
+            i++;
+        }
+        return (int)(sign * result);
+    }
     public int Reverse(int x)
     {
         long rev = 0;
