@@ -28,6 +28,47 @@ public static class Kata
 
 public class Solution
 {
+    public:
+    int maxArea(vector<int>& height)
+    {
+        int left = 0;
+        int right = height.size() - 1;
+        int max_area = 0;
+        while (left < right)
+        {
+            int width = right - left;
+            int h = min(height[left], height[right]);
+            int area = width * h;
+            max_area = max(max_area, area);
+            if (height[left] < height[right])
+            {
+                left++;
+            }
+            else
+            {
+                right--;
+            }
+        }
+        return max_area;
+    }
+    public:
+    bool isMatch(string s, string p)
+    {
+        if (p.empty())
+            return s.empty();
+        bool first_match = (!s.empty() &&
+                            (s[0] == p[0] || p[0] == '.'));
+        if (p.length() >= 2 && p[1] == '*')
+            {
+            return (isMatch(s, p.substr(2)) ||
+                    (first_match && isMatch(s.substr(1), p)));
+        }
+        else
+        {
+            return first_match && isMatch(s.substr(1), p.substr(1));
+        }
+
+    }
     public bool IsPalindrome(int x)
     {
         if (x < 0)
