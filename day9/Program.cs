@@ -23,7 +23,28 @@ public static class Kata
 
 public class Solution
 {
-        public string LongestCommonPrefix(string[] strs)
+    public List<int> SubarraySum(int[] arr, int target)
+    {
+        var result = new List<int>();
+        int n = arr.Length;
+        for (int i = 0; i < n; i++)
+        {
+            int sum = 0;
+            for (int j = i; j < n; j++)
+            {
+                sum += arr[j];
+                if (sum == target)
+                {
+                    result.Add(i + 1); // 1-based index
+                    result.Add(j + 1); // 1-based index
+                    return result;
+                }
+            }
+        }
+        result.Add(-1);
+        return result;
+    }
+    public string LongestCommonPrefix(string[] strs)
         {
             if (strs == null || strs.Length == 0) return "";
             string prefix = strs[0];
@@ -37,6 +58,7 @@ public class Solution
             }
             return prefix;
         }
+    // C++ -> C# conversion: romanToInt
     public int RomanToInt(string s)
     {
         if (string.IsNullOrEmpty(s)) return 0;
