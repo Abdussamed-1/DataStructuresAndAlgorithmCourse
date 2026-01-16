@@ -14,3 +14,20 @@ class Program
           */
     }
 }
+/*
+ * 
+Example
+Inside Main(), call the myMethod() method:
+*/
+
+static void MyMethod()
+{
+    Console.WriteLine("I just got executed!");
+}
+
+static void Main(string[] args)
+{
+    MyMethod();
+}
+
+// Outputs "I just got executed!"
