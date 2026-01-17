@@ -1,5 +1,7 @@
 ﻿// Create a method inside the Program class:
 
+/*
+ * Syntax
 using System;
 
 class Program
@@ -11,23 +13,32 @@ class Program
          MyMethod() is the name of the method
          static means that the method belongs to the Program class and not an object of the Program class. You will learn more about objects and how to access methods through objects later in this tutorial.
          void means that this method does not have a return value. You will learn more about return values later in this chapter
-          */
+          
     }
 }
+*/
+
 /*
  * 
 Example
 Inside Main(), call the myMethod() method:
 */
 
-static void MyMethod()
+using System;
+
+namespace MyApplication
 {
-    Console.WriteLine("I just got executed!");
+    class Program
+    {
+        static void MyMethod()
+        {
+            Console.WriteLine("I just got executed!");
+        }
+
+        static void Main(string[] args)
+        {
+            MyMethod();
+        }
+    }
 }
 
-static void Main(string[] args)
-{
-    MyMethod();
-}
-
-// Outputs "I just got executed!"
