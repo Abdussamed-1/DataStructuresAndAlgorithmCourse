@@ -26,7 +26,7 @@ Inside Main(), call the myMethod() method:
 
 using System;
 
-namespace MyApplication
+namespace day11
 {
     class Program
     {
@@ -35,10 +35,18 @@ namespace MyApplication
             Console.WriteLine("I just got executed!");
         }
 
+        static void ConsoleMethod(string fname)
+        {
+            Console.WriteLine(fname + " Refsnes");
+        }
+
         static void Main(string[] args)
         {
             MyMethod();
+
+            ConsoleMethod("Liam");
+            ConsoleMethod("Jenny");
+            ConsoleMethod("Anja");
         }
     }
 }
-
