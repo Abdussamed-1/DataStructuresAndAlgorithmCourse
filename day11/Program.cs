@@ -40,6 +40,10 @@ namespace day11
             Console.WriteLine(fname + " Refsnes");
         }
 
+        static void MyMethod(string fname, int age)
+        {
+            Console.WriteLine(fname + " is " + age);
+        }
         static void Main(string[] args)
         {
             MyMethod();
@@ -47,6 +51,10 @@ namespace day11
             ConsoleMethod("Liam");
             ConsoleMethod("Jenny");
             ConsoleMethod("Anja");
+
+            MyMethod("Liam", 5);
+            MyMethod("Jenny", 8);
+            MyMethod("Anja", 31);
         }
     }
 }
