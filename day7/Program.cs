@@ -12,9 +12,17 @@ namespace day7
     {
         static void Main(string[] args)
         {
+            int i = 0;
+            while (true) ;
+            {
+
+            }
+            Console.Readkey();
+
+
             for (int i = 0; i <= 10; i = i + 2)
             {
-                Console.WriteLine(i);
+                //Console.WriteLine(i);
             }
         }
     }
