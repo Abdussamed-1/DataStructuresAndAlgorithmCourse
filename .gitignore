@@ -8,6 +8,8 @@
 *.userosscache
 *.sln.docstates
 
+
+
 # MonoDevelop / Rider
 *.userprefs
 .idea/
@@ -99,6 +101,7 @@ Desktop.ini
 *.user
 *.userosscache
 *.sln.docstates
+.sln
 
 # Ignore NuGet packages folder created by older versions of nuget.exe
 packages/
