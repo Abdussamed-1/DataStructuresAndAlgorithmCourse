@@ -23,6 +23,38 @@ public static class Kata
 
 public class Solution
 {
+    public int ThreeSumClosest(int[] nums, int target)
+    { 
+        Array.Sort(nums);
+        int n = nums.Length;
+        int closestSum = nums[0] + nums[1] + nums[2];
+        for (int i = 0; i < n - 2; i++)
+        {
+            int left = i + 1;
+            int right = n - 1;
+            while (left < right)
+            {
+                int currentSum = nums[i] + nums[left] + nums[right];
+                if (Math.Abs(currentSum - target) < Math.Abs(closestSum - target))
+                {
+                    closestSum = currentSum;
+                }
+                if (currentSum < target)
+                {
+                    left++;
+                }
+                else if (currentSum > target)
+                {
+                    right--;
+                }
+                else
+                {
+                    return currentSum; // Exact match found
+                }
+            }
+        }
+        return closestSum;
+    }
     public IList<IList<int>> ThreeSum(int[] nums)
     {
         int n = nums.Length;
