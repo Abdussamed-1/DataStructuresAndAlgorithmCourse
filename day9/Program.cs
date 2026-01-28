@@ -6,6 +6,22 @@ namespace day9;
 
 public static class Kata
 {
+
+    public static string AlphabetPosition(string text)
+    {
+        text = text.ToLower();
+        var result = new System.Text.StringBuilder();
+        foreach (char c in text)
+        {
+            if (char.IsLetter(c))
+            {
+                int position = c - 'a' + 1;
+                result.Append(position + " ");
+            }
+        }
+        text = result.ToString().TrimEnd();
+        return text;
+    }
     public static string Likes(string[] name)
     {
         if (name == null || name.Length == 0)
