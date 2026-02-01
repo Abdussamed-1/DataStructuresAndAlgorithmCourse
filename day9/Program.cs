@@ -43,6 +43,7 @@ public class Solution
     public IList<string> LetterCombinations(string digits)
     {
         if (string.IsNullOrEmpty(digits)) return new List<string>();
+
         var phoneMap = new Dictionary<char, string>
         {
             {'2', "abc"},
@@ -54,20 +55,32 @@ public class Solution
             {'8', "tuv"},
             {'9', "wxyz"}
         };
+
+        // Validate input: if any digit is not 2-9, return empty (or could throw).
+        foreach (char d in digits)
+            if (!phoneMap.ContainsKey(d))
+                return new List<string>();
+
         var result = new List<string>();
-        void Backtrack(int index, string path)
+
+        void Backtrack(int index, System.Text.StringBuilder path)
         {
             if (index == digits.Length)
             {
-                result.Add(path);
+                result.Add(path.ToString());
                 return;
             }
-            string possibleLetters = phoneMap[digits[index]];
-            foreach (char letter in possibleLetters)
+
+            string letters = phoneMap[digits[index]];
+            for (int i = 0; i < letters.Length; i++)
             {
-                Backtrack(index + 1, path + letter);
+                path.Append(letters[i]);
+                Backtrack(index + 1, path);
+                path.Length--; // backtrack
             }
         }
+
+        Backtrack(0, new System.Text.StringBuilder(digits.Length));
         return result;
     }
 
