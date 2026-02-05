@@ -45,26 +45,35 @@ public class Solution
         Array.Sort(nums);
         var result = new List<IList<int>>();
         int n = nums.Length;
+
         for (int i = 0; i < n - 3; i++)
         {
-            if (i > 0 && nums[i] == nums[i - 1]) continue; // Skip duplicates
+            if (i > 0 && nums[i] == nums[i - 1]) continue;
+
             for (int j = i + 1; j < n - 2; j++)
             {
-                if (j > i + 1 && nums[j] == nums[j - 1]) continue; // Skip duplicates
+                if (j > i + 1 && nums[j] == nums[j - 1]) continue;
+
                 int left = j + 1;
                 int right = n - 1;
+
                 while (left < right)
                 {
-                    int sum = nums[i] + nums[j] + nums[left] + nums[right];
-                    if (sum == target)
+                    // Use long to avoid int overflow (e.g., 1_000_000_000 * 4)
+                    long sum = (long)nums[i] + nums[j] + nums[left] + nums[right];
+                    long t = target;
+
+                    if (sum == t)
                     {
                         result.Add(new List<int> { nums[i], nums[j], nums[left], nums[right] });
-                        while (left < right && nums[left] == nums[left + 1]) left++; // Skip duplicates
-                        while (left < right && nums[right] == nums[right - 1]) right--; // Skip duplicates
+
+                        while (left < right && nums[left] == nums[left + 1]) left++;
+                        while (left < right && nums[right] == nums[right - 1]) right--;
+
                         left++;
                         right--;
                     }
-                    else if (sum < target)
+                    else if (sum < t)
                     {
                         left++;
                     }
