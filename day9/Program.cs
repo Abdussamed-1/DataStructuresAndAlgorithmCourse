@@ -39,6 +39,32 @@ public static class Kata
 
 public class Solution
 {
+
+    public bool IsValid(string s)
+    {
+        var stack = new Stack<char>();
+        var pairs = new Dictionary<char, char>
+        {
+            { ')', '(' },
+            { '}', '{' },
+            { ']', '[' }
+        };
+        foreach (char c in s)
+        {
+            if (pairs.ContainsKey(c))
+            {
+                char top = stack.Count > 0 ? stack.Pop() : '#';
+                if (top != pairs[c]) return false;
+            }
+            else
+            {
+                stack.Push(c);
+            }
+        }
+        return stack.Count == 0;
+
+    }
+
     public ListNode RemoveNthFromEnd(ListNode head, int n)
     {
         var dummy = new ListNode(0) { next = head };
