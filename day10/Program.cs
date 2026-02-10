@@ -12,39 +12,46 @@ using System.Text.RegularExpressions;
 using System.Text;
 using System;
 
-class Result
+internal class loop
 {
-
-    /*
-     * Complete the 'reverseArray' function below.
-     * The function is expected to return an INTEGER_ARRAY.
-     * The function accepts INTEGER_ARRAY a as parameter.
-     */
-
-    public static List<int> reverseArray(List<int> a)
+    static void Main(string[] args)
     {
-        a.Reverse();
-        return a;
-
+        int i = 0;
+        while (i < 10)
+        {
+            Console.WriteLine("{0,-3} {1,-3}", i);
+            i++;
+        }
+        Console.WriteLine("Döngü Sonu!");
+        Console.ReadKey();
     }
 
 }
 
-class Solution
+/*
+class Result
 {
-    public static void Main(string[] args)
+    * Complete the 'reverseArray' function below.
+    * The function is expected to return an INTEGER_ARRAY.
+    * The function accepts INTEGER_ARRAY a as parameter.
+
+   public static List<int> reverseArray(List<int> a)
+   {
+       a.Reverse();
+       return a;
+   }
+}*/
+
+class Program : loop
+{
+    static void Main(string[] args)
     {
-        TextWriter textWriter = new StreamWriter(@System.Environment.GetEnvironmentVariable("OUTPUT_PATH"), true);
-
-        int arrCount = Convert.ToInt32(Console.ReadLine().Trim());
-
-        List<int> arr = Console.ReadLine().TrimEnd().Split(' ').ToList().Select(arrTemp => Convert.ToInt32(arrTemp)).ToList();
-
-        List<int> res = Result.reverseArray(arr);
-
-        textWriter.WriteLine(String.Join(" ", res));
-
-        textWriter.Flush();
-        textWriter.Close();
+        int sayac = 1;
+        while (sayac < 10)
+        {
+            Console.WriteLine("{0,-3} {1,-3}", sayac, sayac*sayac);
+            sayac++;
+        }
+        Console.ReadKey();
     }
 }
