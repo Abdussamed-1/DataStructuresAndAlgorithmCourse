@@ -24,19 +24,20 @@ class Result
         return a;
     }
 }*/
-namespace day 10
+namespace day10
 {
-public class Program
-{
-    static void Main(string[] args)
+    public class Program
     {
-        int sayac = 1;
-        while (sayac <= 10)
+        static void Main(string[] args)
         {
-            Console.WriteLine("{0,-3} {1,-3}", sayac, sayac * sayac);
-            sayac += 1;
+            int sayac = 1;
+            while (sayac <= 10)
+            {
+                Console.WriteLine("{0,-3} {1,-3}", sayac, sayac * sayac);
+                sayac += 1;
+            }
+
+            Console.ReadKey();
         }
-        Console.ReadKey();
     }
-}
 }
