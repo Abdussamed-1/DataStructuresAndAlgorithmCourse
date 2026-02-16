@@ -28,6 +28,12 @@ namespace day10
 {
     public class Solution
     {
+        public IList<string> GenerateParenthesis(int n)
+        {
+            var result = new List<string>();
+            GenerateParenthesis(result, string.Empty, n, n);
+            return result;
+        }
         public ListNode MergeTwoLists(ListNode list1, ListNode list2)
         {
             if (list1 == null)
