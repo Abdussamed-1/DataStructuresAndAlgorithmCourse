@@ -28,6 +28,24 @@ namespace day10
 {
     public class Solution
     {
+        public ListNode MergeKLists(ListNode[] lists)
+        {
+            if (lists == null || lists.Length == 0)
+                return null;
+            while (lists.Length > 1)
+            {
+                List<ListNode> mergedLists = new List<ListNode>();
+                for (int i = 0; i < lists.Length; i += 2)
+                {
+                    if (i + 1 < lists.Length)
+                        mergedLists.Add(MergeTwoLists(lists[i], lists[i + 1]));
+                    else
+                        mergedLists.Add(lists[i]);
+                }
+                lists = mergedLists.ToArray();
+            }
+            return lists[0];
+        }
         public IList<string> GenerateParenthesis(int n)
         {
             IList<string> result = new List<string>();
