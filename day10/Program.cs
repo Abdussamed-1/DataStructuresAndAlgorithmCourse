@@ -30,21 +30,31 @@ namespace day10
     {
         public ListNode MergeKLists(ListNode[] lists)
         {
-            if (lists == null || lists.Length == 0)
-                return null;
-            while (lists.Length > 1)
+            if (lists == null || lists.Length == 0) return null;
+
+            var pq = new PriorityQueue<ListNode, int>();
+
+            for (int i = 0; i < lists.Length; i++)
             {
-                List<ListNode> mergedLists = new List<ListNode>();
-                for (int i = 0; i < lists.Length; i += 2)
-                {
-                    if (i + 1 < lists.Length)
-                        mergedLists.Add(MergeTwoLists(lists[i], lists[i + 1]));
-                    else
-                        mergedLists.Add(lists[i]);
-                }
-                lists = mergedLists.ToArray();
+                if (lists[i] != null)
+                    pq.Enqueue(lists[i], lists[i].val);
             }
-            return lists[0];
+
+            var dummy = new ListNode(0);
+            var tail = dummy;
+
+            while (pq.Count > 0)
+            {
+                var node = pq.Dequeue();
+                tail.next = node;
+                tail = node;
+
+                if (node.next != null)
+                    pq.Enqueue(node.next, node.next.val);
+            }
+
+            tail.next = null;
+            return dummy.next;
         }
         public IList<string> GenerateParenthesis(int n)
         {
