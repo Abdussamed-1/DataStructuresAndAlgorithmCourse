@@ -28,6 +28,17 @@ namespace day10
 {
     public class Solution
     {
+
+        public ListNode SwapPairs(ListNode head)
+        {
+            if (head == null || head.next == null)
+                return head;
+            var first = head;
+            var second = head.next;
+            first.next = SwapPairs(second.next);
+            second.next = first;
+            return second;
+        }
         public ListNode MergeKLists(ListNode[] lists)
         {
             if (lists == null || lists.Length == 0) return null;
