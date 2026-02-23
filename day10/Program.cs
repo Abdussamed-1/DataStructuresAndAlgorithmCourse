@@ -26,9 +26,59 @@ class Result
 }*/
 namespace day10
 {
+    public class ListNode
+    {
+        public int val;
+        public ListNode next;
+        public ListNode(int val = 0, ListNode next = null)
+        {
+            this.val = val;
+            this.next = next;
+        }
+    }
     public class Solution
     {
+        public ListNode ReverseKGroup(ListNode head, int k)
+        {
+            if (head == null || k <= 1)
+                return head;
+            var dummy = new ListNode(0);
+            dummy.next = head;
+            var prevGroupEnd = dummy;
+            while (true)
+            {
+                var kthNode = GetKthNode(prevGroupEnd, k);
+                if (kthNode == null)
+                    break;
+                var groupStart = prevGroupEnd.next;
+                var nextGroupStart = kthNode.next;
+                // Reverse the current group
+                var prev = nextGroupStart;
+                var current = groupStart;
+                while (current != nextGroupStart)
+                {
+                    var tempNext = current.next;
+                    current.next = prev;
+                    prev = current;
+                    current = tempNext;
+                }
+                // Connect the previous group with the reversed current group
+                prevGroupEnd.next = kthNode;
+                prevGroupEnd = groupStart; // Move to the end of the reversed group
+            }
+            return dummy.next;
 
+        }
+        private ListNode GetKthNode(ListNode start, int k)
+        {
+            var current = start;
+            while (current != null && k > 0)
+            {
+                current = current.next;
+                k--;
+            }
+            return current;
+        }
         public ListNode SwapPairs(ListNode head)
         {
             if (head == null || head.next == null)
