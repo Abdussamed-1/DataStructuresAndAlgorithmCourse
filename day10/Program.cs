@@ -38,6 +38,21 @@ namespace day10
     }
     public class Solution
     {
+        public int RemoveDuplicates(int[] nums)
+        {
+            if (nums.Length == 0) return 0;
+            int uniqueCount = 1; // Start with the first element as unique
+            for (int i = 1; i < nums.Length; i++)
+            {
+                if (nums[i] != nums[uniqueCount - 1])
+                {
+                    nums[uniqueCount] = nums[i];
+                    uniqueCount++;
+                }
+            }
+            return uniqueCount;
+
+        }
         public ListNode ReverseKGroup(ListNode head, int k)
         {
             if (head == null || k <= 1)
