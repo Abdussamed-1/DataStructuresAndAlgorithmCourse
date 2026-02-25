@@ -38,6 +38,12 @@ namespace day10
     }
     public class Solution
     {
+        public static int[] ArrayDiff(int[] a, int[] b)
+        {
+            // Your brilliant solution goes here
+            // It's possible to pass random tests in about a second ;)
+            
+        }
         public int RemoveDuplicates(int[] nums)
         {
             if (nums.Length == 0) return 0;
