@@ -40,9 +40,19 @@ namespace day10
     {
         public static int[] ArrayDiff(int[] a, int[] b)
         {
-            // Your brilliant solution goes here
-            // It's possible to pass random tests in about a second ;)
-            
+            if (a == null) return new int[0];
+            if (b == null || b.Length == 0) return (int[])a.Clone();
+
+            var bSet = new HashSet<int>(b);
+            var result = new List<int>(a.Length);
+            foreach (int num in a)
+            {
+                if (!bSet.Contains(num))
+                {
+                    result.Add(num);
+                }
+            }
+            return result.ToArray();
         }
         public int RemoveDuplicates(int[] nums)
         {
