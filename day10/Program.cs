@@ -38,21 +38,18 @@ namespace day10
     }
     public class Solution
     {
-        public static int[] ArrayDiff(int[] a, int[] b)
+        public int RemoveElement(int[] nums, int val)
         {
-            if (a == null) return new int[0];
-            if (b == null || b.Length == 0) return (int[])a.Clone();
-
-            var bSet = new HashSet<int>(b);
-            var result = new List<int>(a.Length);
-            foreach (int num in a)
+            int newLength = 0;
+            for (int i = 0; i < nums.Length; i++)
             {
-                if (!bSet.Contains(num))
+                if (nums[i] != val)
                 {
-                    result.Add(num);
+                    nums[newLength] = nums[i];
+                    newLength++;
                 }
             }
-            return result.ToArray();
+            return newLength;
         }
         public int RemoveDuplicates(int[] nums)
         {
