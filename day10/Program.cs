@@ -38,6 +38,27 @@ namespace day10
     }
     public class Solution
     {
+        public int Divide(int dividend, int divisor)
+        { 
+            if (divisor == 0) throw new DivideByZeroException();
+            if (dividend == int.MinValue && divisor == -1) return int.MaxValue;
+            int sign = ((dividend < 0) ^ (divisor < 0)) ? -1 : 1;
+            long dividendL = Math.Abs((long)dividend);
+            long divisorL = Math.Abs((long)divisor);
+            long quotient = 0;
+            while (dividendL >= divisorL)
+            {
+                long tempDivisor = divisorL, multiple = 1;
+                while (dividendL >= (tempDivisor << 1))
+                {
+                    tempDivisor <<= 1;
+                    multiple <<= 1;
+                }
+                dividendL -= tempDivisor;
+                quotient += multiple;
+            }
+            return (int)(sign * quotient);
+        }
         public int StrStr(string haystack, string needle)
         {
             if (string.IsNullOrEmpty(needle))
