@@ -38,6 +38,44 @@ namespace day10
     }
     public class Solution
     {
+        public IList<int> FindSubstring(string s, string[] words)
+        {
+            IList<int> result = new List<int>();
+            if (s == null || words == null || words.Length == 0)
+                return result;
+            int wordLength = words[0].Length;
+            int totalWords = words.Length;
+            int substringLength = wordLength * totalWords;
+            if (s.Length < substringLength)
+                return result;
+            var wordCount = new Dictionary<string, int>();
+            foreach (var word in words)
+            {
+                if (!wordCount.ContainsKey(word))
+                    wordCount[word] = 0;
+                wordCount[word]++;
+            }
+            for (int i = 0; i <= s.Length - substringLength; i++)
+            {
+                var seenWords = new Dictionary<string, int>();
+                int j = 0;
+                while (j < totalWords)
+                {
+                    string currentWord = s.Substring(i + j * wordLength, wordLength);
+                    if (!wordCount.ContainsKey(currentWord))
+                        break;
+                    if (!seenWords.ContainsKey(currentWord))
+                        seenWords[currentWord] = 0;
+                    seenWords[currentWord]++;
+                    if (seenWords[currentWord] > wordCount[currentWord])
+                        break;
+                    j++;
+                }
+                if (j == totalWords)
+                    result.Add(i);
+            }
+            return result;
+        }
         public int Divide(int dividend, int divisor)
         { 
             if (divisor == 0) throw new DivideByZeroException();
