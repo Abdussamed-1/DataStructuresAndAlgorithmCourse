@@ -74,41 +74,77 @@ namespace day10
                 j--;
             }
         }
+
         public IList<int> FindSubstring(string s, string[] words)
         {
             IList<int> result = new List<int>();
-            if (s == null || words == null || words.Length == 0)
+            if (string.IsNullOrEmpty(s) || words == null || words.Length == 0)
                 return result;
+
             int wordLength = words[0].Length;
-            int totalWords = words.Length;
-            int substringLength = wordLength * totalWords;
-            if (s.Length < substringLength)
+            int totalWordsLength = wordLength * words.Length;
+            int wordsCount = words.Length;
+
+            if (s.Length < totalWordsLength)
                 return result;
+
+            // Count frequency of each word
             var wordCount = new Dictionary<string, int>();
             foreach (var word in words)
             {
-                if (!wordCount.ContainsKey(word))
-                    wordCount[word] = 0;
-                wordCount[word]++;
+                wordCount[word] = wordCount.GetValueOrDefault(word, 0) + 1;
             }
-            for (int i = 0; i <= s.Length - substringLength; i++)
+
+            // Try each possible starting offset (0 to wordLength-1)
+            for (int offset = 0; offset < wordLength; offset++)
             {
                 var seenWords = new Dictionary<string, int>();
-                int j = 0;
-                while (j < totalWords)
+                int left = offset;
+                int matchedWords = 0;
+
+                // Sliding window approach
+                for (int right = offset; right <= s.Length - wordLength; right += wordLength)
                 {
-                    string currentWord = s.Substring(i + j * wordLength, wordLength);
-                    if (!wordCount.ContainsKey(currentWord))
-                        break;
-                    if (!seenWords.ContainsKey(currentWord))
-                        seenWords[currentWord] = 0;
-                    seenWords[currentWord]++;
-                    if (seenWords[currentWord] > wordCount[currentWord])
-                        break;
-                    j++;
+                    string word = s.Substring(right, wordLength);
+
+                    if (wordCount.ContainsKey(word))
+                    {
+                        seenWords[word] = seenWords.GetValueOrDefault(word, 0) + 1;
+                        matchedWords++;
+
+                        // If we have too many of this word, shrink window from left
+                        while (seenWords[word] > wordCount[word])
+                        {
+                            string leftWord = s.Substring(left, wordLength);
+                            seenWords[leftWord]--;
+                            if (seenWords[leftWord] == 0)
+                                seenWords.Remove(leftWord);
+                            matchedWords--;
+                            left += wordLength;
+                        }
+
+                        // If we have exactly the right number of words, we found a match
+                        if (matchedWords == wordsCount)
+                        {
+                            result.Add(left);
+
+                            // Move left pointer to start looking for next match
+                            string leftWord = s.Substring(left, wordLength);
+                            seenWords[leftWord]--;
+                            if (seenWords[leftWord] == 0)
+                                seenWords.Remove(leftWord);
+                            matchedWords--;
+                            left += wordLength;
+                        }
+                    }
+                    else
+                    {
+                        // Reset everything if we encounter a word not in our list
+                        seenWords.Clear();
+                        matchedWords = 0;
+                        left = right + wordLength;
+                    }
                 }
-                if (j == totalWords)
-                    result.Add(i);
             }
             return result;
         }
