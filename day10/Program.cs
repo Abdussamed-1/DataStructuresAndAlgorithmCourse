@@ -38,6 +38,32 @@ namespace day10
     }
     public class Solution
     {
+        public int LongestValidParentheses(string s)
+        {
+            int maxLength = 0;
+            Stack<int> stack = new Stack<int>();
+            stack.Push(-1); // Base index for valid parentheses
+            for (int i = 0; i < s.Length; i++)
+            {
+                if (s[i] == '(')
+                {
+                    stack.Push(i); // Push the index of '('
+                }
+                else
+                {
+                    stack.Pop(); // Pop the last '(' index
+                    if (stack.Count == 0)
+                    {
+                        stack.Push(i); // Push the current index as base for future valid parentheses
+                    }
+                    else
+                    {
+                        maxLength = Math.Max(maxLength, i - stack.Peek());
+                    }
+                }
+            }
+            return maxLength;
+        }
         public void NextPermutation(int[] nums)
         {
             if (nums == null || nums.Length <= 1) return;
