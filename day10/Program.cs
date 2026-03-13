@@ -67,6 +67,35 @@ namespace day10
             result[1] = right;
             return result;
         }
+        public int[] SearchRange(int[] nums, int target)
+        {
+            int[] result = new int[2] { -1, -1 };
+            int left = 0, right = nums.Length - 1;
+            // Find the leftmost index
+            while (left <= right)
+            {
+                int mid = left + (right - left) / 2;
+                if (nums[mid] < target)
+                    left = mid + 1;
+                else
+                    right = mid - 1;
+            }
+            if (left >= nums.Length || nums[left] != target)
+                return result; // Target not found
+            result[0] = left;
+            // Find the rightmost index
+            right = nums.Length - 1; // Reset right pointer
+            while (left <= right)
+            {
+                int mid = left + (right - left) / 2;
+                if (nums[mid] > target)
+                    right = mid - 1;
+                else
+                    left = mid + 1;
+            }
+            result[1] = right;
+            return result;
+        }
         public int Search(int[] nums, int target)
         {
             int left = 0, right = nums.Length - 1;
