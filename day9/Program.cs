@@ -446,7 +446,7 @@ public class Solution
             if (curRow == 0 || curRow == numRows - 1) goingDown = !goingDown;
             curRow += goingDown ? 1 : -1;
         }
-
+         
         var ret = new System.Text.StringBuilder();
         foreach (var row in rows) ret.Append(row);
         return ret.ToString();
