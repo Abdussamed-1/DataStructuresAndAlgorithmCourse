@@ -38,7 +38,10 @@ namespace day10
     }
     public class Solution
     {
-
+        public void SolveSudoku(char[][] board)
+        {
+            Solve(board);
+        }
         public bool IsValidSudoku(char[][] board)
         {
             HashSet<string> seen = new HashSet<string>();
@@ -472,6 +475,62 @@ namespace day10
                 list2.next = MergeTwoLists(list1, list2.next);
                 return list2;
             }
+        }
+        private bool Solve(char[][] board)
+        {
+            const int N = 9;
+            int[] rows = new int[N], cols = new int[N], boxes = new int[N];
+            var empties = new List<(int r, int c)>();
+
+            for (int i = 0; i < N; i++)
+            {
+                for (int j = 0; j < N; j++)
+                {
+                    if (board[i][j] == '.')
+                    {
+                        empties.Add((i, j));
+                    }
+                    else
+                    {
+                        int v = board[i][j] - '1'; // 0..8
+                        int mask = 1 << v;
+                        rows[i] |= mask;
+                        cols[j] |= mask;
+                        boxes[(i / 3) * 3 + (j / 3)] |= mask;
+                    }
+                }
+            }
+
+            bool Dfs(int idx)
+            {
+                if (idx == empties.Count) return true;
+                var (r, c) = empties[idx];
+                int b = (r / 3) * 3 + (c / 3);
+                int used = rows[r] | cols[c] | boxes[b];
+
+                for (int d = 0; d < 9; d++)
+                {
+                    int mask = 1 << d;
+                    if ((used & mask) != 0) continue;
+                    // place digit
+                    rows[r] |= mask;
+                    cols[c] |= mask;
+                    boxes[b] |= mask;
+                    board[r][c] = (char)('1' + d);
+
+                    if (Dfs(idx + 1)) return true;
+
+                    // undo
+                    board[r][c] = '.';
+                    rows[r] &= ~mask;
+                    cols[c] &= ~mask;
+                    boxes[b] &= ~mask;
+                }
+                return false;
+            }
+
+            Dfs(0);
+            return true;
         }
     }
     public class Program
