@@ -38,6 +38,48 @@ namespace day10
     }
     public class Solution
     {
+            public IList<IList<int>> CombinationSum2(int[] candidates, int target)
+            {
+                IList<IList<int>> result = new List<IList<int>>();
+                Array.Sort(candidates); // Sort to help with pruning and skipping duplicates
+                Backtrack(candidates, target, 0, new List<int>(), result);
+                return result;
+            }
+
+        private void Backtrack(int[] candidates, int target, int start, List<int> current, IList<IList<int>> result)
+        {
+            // Base case: if target becomes 0, we found a valid combination
+            if (target == 0)
+            {
+                result.Add(new List<int>(current));
+                return;
+            }
+
+            // If target becomes negative, stop exploring this path
+            if (target < 0)
+                return;
+
+            // Explore all candidates starting from 'start' index
+            for (int i = start; i < candidates.Length; i++)
+            {
+                // Skip duplicates: if current candidate equals previous and we're not at start
+                if (i > start && candidates[i] == candidates[i - 1])
+                    continue;
+
+                // Pruning: if candidate is greater than target, stop (array is sorted)
+                if (candidates[i] > target)
+                    break;
+
+                // Choose the candidate
+                current.Add(candidates[i]);
+
+                // Recursively explore with the next index (each number used only once)
+                Backtrack(candidates, target - candidates[i], i + 1, current, result);
+
+                // Unchoose the candidate (backtrack)
+                current.RemoveAt(current.Count - 1);
+            }
+        }
         public IList<IList<int>> CombinationSum(int[] candidates, int target)
         {
             IList<IList<int>> result = new List<IList<int>>();
