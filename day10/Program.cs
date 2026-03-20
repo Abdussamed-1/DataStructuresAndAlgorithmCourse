@@ -38,7 +38,27 @@ namespace day10
     }
     public class Solution
     {
-            public IList<IList<int>> CombinationSum2(int[] candidates, int target)
+        public int FirstMissingPositive(int[] nums)
+        {
+            int n = nums.Length;
+            for (int i = 0; i < n; i++)
+            {
+                while (nums[i] > 0 && nums[i] <= n && nums[nums[i] - 1] != nums[i])
+                {
+                    // Swap nums[i] with nums[nums[i] - 1]
+                    int temp = nums[nums[i] - 1];
+                    nums[nums[i] - 1] = nums[i];
+                    nums[i] = temp;
+                }
+            }
+            for (int i = 0; i < n; i++)
+            {
+                if (nums[i] != i + 1)
+                    return i + 1;
+            }
+            return n + 1;
+        }
+        public IList<IList<int>> CombinationSum2(int[] candidates, int target)
             {
                 IList<IList<int>> result = new List<IList<int>>();
                 Array.Sort(candidates); // Sort to help with pruning and skipping duplicates
