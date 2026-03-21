@@ -32,6 +32,10 @@ artifacts/
 *.log
 *.tlog
 *.lastbuildstate
+bin/
+obj/
+*.user
+*.suo
 
 # NuGet
 *.nupkg
