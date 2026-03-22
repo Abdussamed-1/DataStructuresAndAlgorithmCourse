@@ -1,6 +1,8 @@
-﻿class program
+﻿using System;
+
+public class Program
 {
-    static void Main(string[], args)
+    static void Main(string[] args)
     {
         int sayac = 0;
         while (sayac <= 10)
