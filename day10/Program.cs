@@ -38,6 +38,30 @@ namespace day10
     }
     public class Solution
     {
+        public int Jump(int[] nums)
+        {
+            
+
+            // We don't need to jump from the last index
+            for (int i = 0; i < nums.Length - 1; i++)
+            {
+                // Update the farthest we can reach from current position
+                nextMaxReach = Math.Max(nextMaxReach, i + nums[i]);
+
+                // If we've reached the end of current jump range
+                if (i == currentMaxReach)
+                {
+                    jumps++;
+                    currentMaxReach = nextMaxReach;
+
+                    // If we can already reach the last index, break early
+                    if (currentMaxReach >= nums.Length - 1)
+                        break;
+                }
+            }
+
+            return jumps;
+        }
         public bool IsMatch(string s, string p)
         {
             int m = s.Length, n = p.Length;
