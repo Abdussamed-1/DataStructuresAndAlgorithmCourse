@@ -38,9 +38,46 @@ namespace day10
     }
     public class Solution
     {
+        public IList<IList<int>> Permute(int[] nums)
+        {
+            IList<IList<int>> result = new List<IList<int>>();
+            BacktrackPermute(nums, new List<int>(), new bool[nums.Length], result);
+            return result;
+        }
+
+        private void BacktrackPermute(int[] nums, List<int> current, bool[] used, IList<IList<int>> result)
+        {
+            // Base case: if we've used all numbers, add the permutation to result
+            if (current.Count == nums.Length)
+            {
+                result.Add(new List<int>(current));
+                return;
+            }
+
+            // Try each number as the next element
+            for (int i = 0; i < nums.Length; i++)
+            {
+                // Skip if this number is already used
+                if (used[i])
+                    continue;
+
+                // Choose the number
+                current.Add(nums[i]);
+                used[i] = true;
+
+                // Recursively build the rest of the permutation
+                BacktrackPermute(nums, current, used, result);
+
+                // Backtrack: undo the choice
+                current.RemoveAt(current.Count - 1);
+                used[i] = false;
+            }
+        }
         public int Jump(int[] nums)
         {
-            
+            int jumps = 0;
+            int currentMaxReach = 0;
+            int nextMaxReach = 0;
 
             // We don't need to jump from the last index
             for (int i = 0; i < nums.Length - 1; i++)
