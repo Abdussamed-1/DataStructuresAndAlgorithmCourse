@@ -38,6 +38,48 @@ namespace day10
     }
     public class Solution
     {
+
+        public IList<IList<int>> PermuteUnique(int[] nums)
+        {
+            IList<IList<int>> result = new List<IList<int>>();
+            Array.Sort(nums); // Sort to handle duplicates
+            bool[] used = new bool[nums.Length];
+            
+            // Inline backtracking logic
+            void Backtrack(List<int> current)
+            {
+                if (current.Count == nums.Length)
+                {
+                    result.Add(new List<int>(current));
+                    return;
+                }
+
+                for (int i = 0; i < nums.Length; i++)
+                {
+                    // Skip if already used
+                    if (used[i])
+                        continue;
+
+                    // Skip duplicates: if current number equals previous and previous is not used
+                    if (i > 0 && nums[i] == nums[i - 1] && !used[i - 1])
+                        continue;
+
+                    // Choose
+                    current.Add(nums[i]);
+                    used[i] = true;
+
+                    // Recurse
+                    Backtrack(current);
+
+                    // Unchoose
+                    current.RemoveAt(current.Count - 1);
+                    used[i] = false;
+                }
+            }
+
+            Backtrack(new List<int>());
+            return result;
+        }
         public IList<IList<int>> Permute(int[] nums)
         {
             IList<IList<int>> result = new List<IList<int>>();
