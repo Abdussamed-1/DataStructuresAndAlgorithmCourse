@@ -38,6 +38,22 @@ namespace day10
     }
     public class Solution
     {
+        public IList<IList<string>> GroupAnagrams(string[] strs)
+        {
+            var anagramGroups = new Dictionary<string, List<string>>();
+            foreach (var str in strs)
+            {
+                var charArray = str.ToCharArray();
+                Array.Sort(charArray);
+                var key = new string(charArray);
+                if (!anagramGroups.ContainsKey(key))
+                {
+                    anagramGroups[key] = new List<string>();
+                }
+                anagramGroups[key].Add(str);
+            }
+            return anagramGroups.Values.ToList<IList<string>>();
+        }
         public void Rotate(int[][] matrix)
         {
             int n = matrix.Length;
