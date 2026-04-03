@@ -41,12 +41,21 @@ namespace day10
         public double MyPow(double x, int n)
         {
             if (n == 0) return 1;
-            if (n < 0)
+            
+            long N = n;
+            if (N < 0)
             {
                 x = 1 / x;
-                n = -n;
+                N = -N;
             }
-            double half = MyPow(x, n / 2);
+            
+            return PowHelper(x, N);
+        }
+
+        private double PowHelper(double x, long n)
+        {
+            if (n == 0) return 1;
+            double half = PowHelper(x, n / 2);
             return n % 2 == 0 ? half * half : half * half * x;
         }
         public IList<IList<string>> GroupAnagrams(string[] strs)
