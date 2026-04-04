@@ -38,6 +38,57 @@ namespace day10
     }
     public class Solution
     {
+        public IList<IList<string>> SolveNQueens(int n)
+        {
+            IList<IList<string>> result = new List<IList<string>>();
+            char[][] board = new char[n][];
+
+            for (int i = 0; i < n; i++)
+                board[i] = new string('.', n).ToCharArray();
+
+            bool[] cols = new bool[n];
+            bool[] diag1 = new bool[2 * n - 1]; // row - col + (n - 1)
+            bool[] diag2 = new bool[2 * n - 1]; // row + col
+
+            SolveNQueensHelper(0, n, board, cols, diag1, diag2, result);
+            return result;
+        }
+
+        private void SolveNQueensHelper(
+            int row,
+            int n,
+            char[][] board,
+            bool[] cols,
+            bool[] diag1,
+            bool[] diag2,
+            IList<IList<string>> result)
+        {
+            if (row == n)
+            {
+                var solution = new List<string>(n);
+                for (int i = 0; i < n; i++)
+                    solution.Add(new string(board[i]));
+                result.Add(solution);
+                return;
+            }
+
+            for (int col = 0; col < n; col++)
+            {
+                int d1 = row - col + n - 1;
+                int d2 = row + col;
+
+                if (cols[col] || diag1[d1] || diag2[d2])
+                    continue;
+
+                board[row][col] = 'Q';
+                cols[col] = diag1[d1] = diag2[d2] = true;
+                    
+                SolveNQueensHelper(row + 1, n, board, cols, diag1, diag2, result);
+
+                board[row][col] = '.';
+                cols[col] = diag1[d1] = diag2[d2] = false;
+            }
+        }
         public double MyPow(double x, int n)
         {
             if (n == 0) return 1;
