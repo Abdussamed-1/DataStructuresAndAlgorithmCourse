@@ -38,6 +38,18 @@ namespace day10
     }
     public class Solution
     {
+        public int TotalNQueens(int n)
+        {
+            int count = 0;
+            char[][] board = new char[n][];
+            for (int i = 0; i < n; i++)
+                board[i] = new string('.', n).ToCharArray();
+            bool[] cols = new bool[n];
+            bool[] diag1 = new bool[2 * n - 1]; // row - col + (n - 1)
+            bool[] diag2 = new bool[2 * n - 1]; // row + col
+            TotalNQueensHelper(0, n, board, cols, diag1, diag2, ref count);
+            return count;
+        }
         public IList<IList<string>> SolveNQueens(int n)
         {
             IList<IList<string>> result = new List<IList<string>>();
@@ -932,6 +944,38 @@ namespace day10
 
             Dfs(0);
             return true;
+        }
+        private void TotalNQueensHelper(
+            int row,
+            int n,
+            char[][] board,
+            bool[] cols,
+            bool[] diag1,
+            bool[] diag2,
+            ref int count)
+        {
+            if (row == n)
+            {
+                count++;
+                return;
+            }
+
+            for (int col = 0; col < n; col++)
+            {
+                int d1 = row - col + n - 1;
+                int d2 = row + col;
+
+                if (cols[col] || diag1[d1] || diag2[d2])
+                    continue;
+
+                board[row][col] = 'Q';
+                cols[col] = diag1[d1] = diag2[d2] = true;
+
+                TotalNQueensHelper(row + 1, n, board, cols, diag1, diag2, ref count);
+
+                board[row][col] = '.';
+                cols[col] = diag1[d1] = diag2[d2] = false;
+            }
         }
     }
     public class Program
