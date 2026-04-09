@@ -38,6 +38,18 @@ namespace day10
     }
     public class Solution
     {
+        public int MaxSubArray(int[] nums)
+        {
+            int maxCurrent = nums[0];
+            int maxGlobal = nums[0];
+            for (int i = 1; i < nums.Length; i++)
+            {
+                maxCurrent = Math.Max(nums[i], maxCurrent + nums[i]);
+                if (maxCurrent > maxGlobal)
+                    maxGlobal = maxCurrent;
+            }
+            return maxGlobal;
+        }
         public int TotalNQueens(int n)
         {
             int count = 0;
