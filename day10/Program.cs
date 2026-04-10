@@ -38,6 +38,35 @@ namespace day10
     }
     public class Solution
     {
+        public IList<int> SpiralOrder(int[][] matrix)
+        {
+            IList<int> result = new List<int>();
+            if (matrix == null || matrix.Length == 0) return result;
+            int top = 0, bottom = matrix.Length - 1;
+            int left = 0, right = matrix[0].Length - 1;
+            while (top <= bottom && left <= right)
+            {
+                for (int j = left; j <= right; j++)
+                    result.Add(matrix[top][j]);
+                top++;
+                for (int i = top; i <= bottom; i++)
+                    result.Add(matrix[i][right]);
+                right--;
+                if (top <= bottom)
+                {
+                    for (int j = right; j >= left; j--)
+                        result.Add(matrix[bottom][j]);
+                    bottom--;
+                }
+                if (left <= right)
+                {
+                    for (int i = bottom; i >= top; i--)
+                        result.Add(matrix[i][left]);
+                    left++;
+                }
+            }
+            return result;
+        }
         public int MaxSubArray(int[] nums)
         {
             int maxCurrent = nums[0];
