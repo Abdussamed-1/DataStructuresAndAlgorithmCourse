@@ -38,6 +38,28 @@ namespace day10
     }
     public class Solution
     {
+
+        public int[][] Merge(int[][] intervals)
+        {
+            int[][] result = new int[intervals.Length][];
+            if (intervals.Length == 0) return result;
+            Array.Sort(intervals, (a, b) => a[0].CompareTo(b[0]));
+            int index = 0;
+            result[index] = intervals[0];
+            for (int i = 1; i < intervals.Length; i++)
+            {
+                if (result[index][1] >= intervals[i][0])
+                {
+                    result[index][1] = Math.Max(result[index][1], intervals[i][1]);
+                }
+                else
+                {
+                    index++;
+                    result[index] = intervals[i];
+                }
+            }
+            return result.Take(index + 1).ToArray();
+        }
         public bool CanJump(int[] nums)
         {
             int maxReach = 0;
