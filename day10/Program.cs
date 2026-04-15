@@ -38,6 +38,24 @@ namespace day10
     }
     public class Solution
     {
+
+        public string GetPermutation(int n, int k)
+        {
+            List<int> numbers = new List<int>();
+            for (int i = 1; i <= n; i++)
+                numbers.Add(i);
+            StringBuilder sb = new StringBuilder();
+            k--; // Convert to 0-based index
+            for (int i = n; i >= 1; i--)
+            {
+                int factorial = Factorial(i - 1);
+                int index = k / factorial;
+                sb.Append(numbers[index]);
+                numbers.RemoveAt(index);
+                k %= factorial;
+            }
+            return sb.ToString();
+        }
         public int[][] GenerateMatrix(int n)
         {
             int [][] matrix = new int[n][];
