@@ -48,7 +48,7 @@ namespace day10
             k--; // Convert to 0-based index
             for (int i = n; i >= 1; i--)
             {
-                int factorial = Factorial(i - 1);
+                int factorial = CalculateFactorial(i - 1);
                 int index = k / factorial;
                 sb.Append(numbers[index]);
                 numbers.RemoveAt(index);
@@ -57,10 +57,10 @@ namespace day10
             return sb.ToString();
         }
 
-        private int Factorial(int n)
+        private int CalculateFactorial(int n)
         {
             if (n <= 1) return 1;
-            return n * Factorial(n - 1);
+            return n * CalculateFactorial(n - 1);
         }
         public int[][] GenerateMatrix(int n)
         {
@@ -418,7 +418,7 @@ namespace day10
                     currentMaxReach = nextMaxReach;
 
                     // If we can already reach the last index, break early
-                    if (currentMaxReach >= nums.Length - 1)
+                    if currentMaxReach >= nums.Length - 1)
                         break;
                 }
             }
