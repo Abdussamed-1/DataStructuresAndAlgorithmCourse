@@ -56,6 +56,12 @@ namespace day10
             }
             return sb.ToString();
         }
+
+        private int Factorial(int n)
+        {
+            if (n <= 1) return 1;
+            return n * Factorial(n - 1);
+        }
         public int[][] GenerateMatrix(int n)
         {
             int [][] matrix = new int[n][];
@@ -103,32 +109,6 @@ namespace day10
                 }
             }
             return length;
-        }
-        public int[][] Insert(int[][] intervals, int[] newInterval)
-        {
-            List<int[]> result = new List<int[]>();
-            int i = 0;
-            // Add all intervals that end before newInterval starts
-            while (i < intervals.Length && intervals[i][1] < newInterval[0])
-            {
-                result.Add(intervals[i]);
-                i++;
-            }
-            // Merge overlapping intervals with newInterval
-            while (i < intervals.Length && intervals[i][0] <= newInterval[1])
-            {
-                newInterval[0] = Math.Min(newInterval[0], intervals[i][0]);
-                newInterval[1] = Math.Max(newInterval[1], intervals[i][1]);
-                i++;
-            }
-            result.Add(newInterval); // Add the merged interval
-            // Add remaining intervals
-            while (i < intervals.Length)
-            {
-                result.Add(intervals[i]);
-                i++;
-            }
-            return result.ToArray();
         }
         public int[][] Insert(int[][] intervals, int[] newInterval)
         {
@@ -685,35 +665,6 @@ namespace day10
             return left; // Left is the insertion point
         }
 
-        public int[] SearchRange(int[] nums, int target)
-        {
-            int[] result = new int[2] { -1, -1 };
-            int left = 0, right = nums.Length - 1;
-            // Find the leftmost index
-            while (left <= right)
-            {
-                int mid = left + (right - left) / 2;
-                if (nums[mid] < target)
-                    left = mid + 1;
-                else
-                    right = mid - 1;
-            }
-            if (left >= nums.Length || nums[left] != target)
-                return result; // Target not found
-            result[0] = left;
-            // Find the rightmost index
-            right = nums.Length - 1; // Reset right pointer
-            while (left <= right)
-            {
-                int mid = left + (right - left) / 2;
-                if (nums[mid] > target)
-                    right = mid - 1;
-                else
-                    left = mid + 1;
-            }
-            result[1] = right;
-            return result;
-        }
         public int[] SearchRange(int[] nums, int target)
         {
             int[] result = new int[2] { -1, -1 };
