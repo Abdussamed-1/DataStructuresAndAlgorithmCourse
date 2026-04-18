@@ -38,6 +38,28 @@ namespace day10
     }
     public class Solution
     {
+        public ListNode RotateRight(ListNode head, int k)
+        {
+            int length = 0;
+            ListNode tail = head;
+            while (tail != null)
+            {
+                length++;
+                if (tail.next == null)
+                    break;
+                tail = tail.next;
+            }
+            if (length == 0) return head;
+            k = k % length;
+            if (k == 0) return head;
+            tail.next = head; // Connect tail to head to make it circular
+            ListNode newTail = head;
+            for (int i = 0; i < length - k - 1; i++)
+                newTail = newTail.next;
+            ListNode newHead = newTail.next;
+            newTail.next = null; // Break the circle
+            return newHead;
+        }
 
         public string GetPermutation(int n, int k)
         {
