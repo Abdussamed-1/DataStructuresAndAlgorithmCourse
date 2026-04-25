@@ -38,6 +38,52 @@ namespace day10
     }
     public class Solution
     {
+        public bool IsNumber(string s)
+        {
+            int i = 0, n = s.Length;
+            while (i < n && char.IsWhiteSpace(s[i])) i++; // Skip leading spaces
+            if (i < n && (s[i] == '+' || s[i] == '-')) i++; // Optional sign
+            bool isNumeric = false;
+            while (i < n && char.IsDigit(s[i]))
+            {
+                isNumeric = true;
+                i++;
+            }
+            if (i < n && s[i] == '.')
+            {
+                i++;
+                while (i < n && char.IsDigit(s[i]))
+                {
+                    isNumeric = true;
+                    i++;
+                }
+            }
+            if (isNumeric && i < n && (s[i] == 'e' || s[i] == 'E'))
+            {
+                i++;
+                if (i < n && (s[i] == '+' || s[i] == '-')) i++; // Optional sign for exponent
+                bool hasExponentDigits = false;
+                while (i < n && char.IsDigit(s[i]))
+                {
+                    hasExponentDigits = true;
+                    i++;
+                }
+                if (!hasExponentDigits) return false; // Exponent must have digits
+            }
+            while (i < n && char.IsWhiteSpace(s[i])) i++; // Skip trailing spaces
+            return isNumeric && i == n; // Must be numeric and consume all characters
+        }
+        private static void IsWhitespace(char c)
+        {
+            if (char.IsWhiteSpace(c))
+            {
+                Console.WriteLine($"'{c}' is a whitespace character.");
+            }
+            else
+            {
+                Console.WriteLine($"'{c}' is not a whitespace character.");
+            }
+        }
         public int UniquePathsWithObstacles(int[][] obstacleGrid)
         {
             int m = obstacleGrid.Length;

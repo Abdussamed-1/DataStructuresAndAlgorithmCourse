@@ -15,16 +15,16 @@ Repository layout (suggested)
 -----------------------------
 Use the following or adapt to your existing layout:
 
-- `README.md` — this file (daily workflow + templates)
-- `src/` — implementations (one folder per day/topic)
+- `README.md` ï¿½ this file (daily workflow + templates)
+- `src/` ï¿½ implementations (one folder per day/topic)
   - `src/Day01_Basics/`
   - `src/Day02_Arrays/`
   - `src/Day03_LinkedList/`
   - ...
-- `tests/` — unit tests for implementations
-- `docs/` — notes, diagrams, references
-- `examples/` — small runnable example projects
-- `.github/` — CI, issue templates (optional)
+- `tests/` ï¿½ unit tests for implementations
+- `docs/` ï¿½ notes, diagrams, references
+- `examples/` ï¿½ small runnable example projects
+- `.github/` ï¿½ CI, issue templates (optional)
 
 Daily learning workflow (repeatable)
 -----------------------------------
@@ -44,7 +44,7 @@ Daily learning workflow (repeatable)
 Daily log template (use in `docs/daily-log.md` or each day's folder)
 -------------------------------------------------------------------
 - Date: YYYY-MM-DD
-- Topic: (e.g., "Singly Linked List — Insert/Remove")
+- Topic: (e.g., "Singly Linked List ï¿½ Insert/Remove")
 - Goals: (short, measurable)
 - Resources:
   - W3Schools C#: https://www.w3schools.com/cs/
@@ -62,7 +62,7 @@ Daily log template (use in `docs/daily-log.md` or each day's folder)
 Example daily note
 ------------------
 - Date: 2025-12-24
-- Topic: Arrays — Two-sum brute force and hash approach
+- Topic: Arrays ï¿½ Two-sum brute force and hash approach
 - Goals: Implement two approaches and compare complexity
 - Resources: W3Schools C# (arrays & dictionaries)
 - Notes: Brute force O(n^2). Hash map approach O(n) average.
@@ -99,8 +99,8 @@ Style and best practices
 
 Resources
 ---------
-- W3Schools C# Tutorials — https://www.w3schools.com/cs/
-- W3Schools C# Array reference — https://www.w3schools.com/cs/cs_arrays.php
+- W3Schools C# Tutorials ï¿½ https://www.w3schools.com/cs/
+- W3Schools C# Array reference ï¿½ https://www.w3schools.com/cs/cs_arrays.php
 - (Optional) GeeksforGeeks and CLRS for algorithm theory
 
 Contributing
