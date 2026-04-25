@@ -112,10 +112,6 @@ Contributing
   - complexity analysis,
   - one or more unit tests.
 
-License
--------
-- Consider `MIT` for a personal learning repo. Add `LICENSE` if you want to publish.
-
 What I added/changed
 --------------------
 - Created a purpose-built `README.md` that defines a reproducible day-to-day learning process, repo layout, templates for daily logs, example entries, and Visual Studio 2022 run/test instructions (commands are shown with underscores as requested).
