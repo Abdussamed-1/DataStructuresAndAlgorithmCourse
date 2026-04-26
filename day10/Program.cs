@@ -38,6 +38,19 @@ namespace day10
     }
     public class Solution
     {
+        public int[] PlusOne(int[] digits)
+        {
+                        for (int i = digits.Length - 1; i >= 0; i--)
+            {
+                if (digits[i] < 9)
+                {
+                    digits[i]++;
+                    return digits;
+                }
+                digits[i] = 0;
+            }
+            return new int[] { 1 }.Concat(digits).ToArray();
+        }
         public bool IsNumber(string s)
         {
             int i = 0, n = s.Length;
