@@ -38,6 +38,24 @@ namespace day10
     }
     public class Solution
     {
+        public string AddBinary(string a, string b)
+        {
+            StringBuilder result = new StringBuilder();
+            int carry = 0;
+            int i = a.Length - 1, j = b.Length - 1;
+            while (i >= 0 || j >= 0 || carry > 0)
+            {
+                int sum = carry;
+                if (i >= 0) sum += a[i--] - '0';
+                if (j >= 0) sum += b[j--] - '0';
+                result.Append(sum % 2);
+                carry = sum / 2;
+            }
+            char[] resArray = result.ToString().ToCharArray();
+            Array.Reverse(resArray);
+            return new string(resArray);
+
+        }
         public int[] PlusOne(int[] digits)
         {
                         for (int i = digits.Length - 1; i >= 0; i--)
