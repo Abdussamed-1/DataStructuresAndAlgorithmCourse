@@ -44,16 +44,20 @@ namespace day10
             IList<string> result = new List<string>();
             while (index < words.Length)
             {
-                int totalChars = words[index].Length;
-                int last = index + 1;
-                while (last < words.Length)
+                // Calculate which words fit in this line
+                int totalChars = 0;
+                int last = index;
+                
+                // Add words while they fit (totalChars tracks only word lengths, no spaces yet)
+                while (last < words.Length && totalChars + words[last].Length + (last - index) <= maxWidth)
                 {
-                    if (totalChars + 1 + words[last].Length > maxWidth) break;
-                    totalChars += 1 + words[last].Length;
+                    totalChars += words[last].Length;
                     last++;
                 }
                 StringBuilder sb = new StringBuilder();
-                int gaps = last - index - 1;
+                int gaps = last - index - 1; // Number of gaps between words
+                
+                // Last line or single word per line: left-justified
                 if (last == words.Length || gaps == 0)
                 {
                     for (int i = index; i < last; i++)
@@ -65,14 +69,19 @@ namespace day10
                 }
                 else
                 {
-                    int spaces = (maxWidth - totalChars) / gaps;
-                    int extraSpaces = (maxWidth - totalChars) % gaps;
+                    // Distribute spaces among gaps
+                    int totalSpaces = maxWidth - totalChars;
+                    int spacesPerGap = totalSpaces / gaps;
+                    int extraSpaces = totalSpaces % gaps;
+                    
                     for (int i = index; i < last; i++)
                     {
                         sb.Append(words[i]);
                         if (i < last - 1)
                         {
-                            sb.Append(' ', spaces + (i - index < extraSpaces ? 1 : 0));
+                            // Add base spaces plus one extra space if needed
+                            int spacesToAdd = spacesPerGap + (i - index < extraSpaces ? 1 : 0);
+                            sb.Append(' ', spacesToAdd);
                         }
                     }
                 }
@@ -86,23 +95,33 @@ namespace day10
             IList<string> result = new List<string>();
             int index = 0;
             while (index < words.Length)
-            {
+            { 
                 int totalChars = words[index].Length;
                 int last = index + 1;
+
                 while (last < words.Length)
                 {
-                    if (totalChars + 1 + words[last].Length > maxWidth) break;
+                    // Check if next word fits (accounting for minimum 1 space between words)
+                    if (totalChars + 1 + words[last].Length > maxWidth)
+                        break;
                     totalChars += 1 + words[last].Length;
                     last++;
                 }
+
+
+
+
                 StringBuilder sb = new StringBuilder();
-                int gaps = last - index - 1;
+                int gaps = last - index - 1; // Number of gaps between words
+
+                // Last line or single word per line: left-justified
                 if (last == words.Length || gaps == 0)
                 {
                     for (int i = index; i < last; i++)
                     {
                         sb.Append(words[i]);
-                        if (i < last - 1) sb.Append(' ');
+                        if (i < last - 1)
+                            sb.Append(' ');
                     }
                     sb.Append(' ', maxWidth - sb.Length);
                 }
