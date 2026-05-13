@@ -38,6 +38,27 @@ namespace day10
     }
     public class Solution
     {
+        public string SimplifyPath(string path)
+        {
+            Stack<string> stack = new Stack<string>();
+            string[] parts = path.Split('/', StringSplitOptions.RemoveEmptyEntries);
+            foreach (var part in parts)
+            {
+                if (part == ".")
+                    continue;
+                else if (part == "..")
+                {
+                    if (stack.Count > 0)
+                        stack.Pop();
+                }
+                else
+                {
+                    stack.Push(part);
+                }
+            }
+            return "/" + string.Join("/", stack.Reverse());
+
+        }
         public int ClimbStairs(int n)
         {
             if (n <= 2) return n;
