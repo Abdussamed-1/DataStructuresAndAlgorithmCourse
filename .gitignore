@@ -7,7 +7,7 @@
 *.user
 *.userosscache
 *.sln.docstates
-
+*.github/
 
 
 # MonoDevelop / Rider

@@ -38,6 +38,74 @@ namespace day10
     }
     public class Solution
     {
+        public string MinWindow(string s, string t)
+        {
+            int m = s.Length;
+            int n = t.Length;
+
+            if (m < n || n == 0)
+                return string.Empty;
+
+            Dictionary<char, int> dictT = new Dictionary<char, int>();
+
+            foreach (char c in t)
+            {
+                dictT[c] = dictT.GetValueOrDefault(c, 0) + 1;
+            }
+
+            int required = dictT.Count;
+            int formed = 0;
+
+            int left = 0;
+            int right = 0;
+
+            Dictionary<char, int> windowCounts = new Dictionary<char, int>();
+
+            int minLength = int.MaxValue;
+            int minLeft = 0;
+
+            while (right < m)
+            {
+                char rightChar = s[right];
+
+                windowCounts[rightChar] = windowCounts.GetValueOrDefault(rightChar, 0) + 1;
+
+                if (dictT.ContainsKey(rightChar) &&
+                    windowCounts[rightChar] == dictT[rightChar])
+                {
+                    formed++;
+                }
+
+                while (left <= right && formed == required)
+                {
+                    int currentLength = right - left + 1;
+
+                    if (currentLength < minLength)
+                    {
+                        minLength = currentLength;
+                        minLeft = left;
+                    }
+
+                    char leftChar = s[left];
+
+                    windowCounts[leftChar]--;
+
+                    if (dictT.ContainsKey(leftChar) &&
+                        windowCounts[leftChar] < dictT[leftChar])
+                    {
+                        formed--;
+                    }
+
+                    left++;
+                }
+
+                right++;
+            }
+
+            return minLength == int.MaxValue
+                ? string.Empty
+                : s.Substring(minLeft, minLength);
+        }
         public void SortColors(int[] nums)
         {
             int low = 0, mid = 0, high = nums.Length - 1;
