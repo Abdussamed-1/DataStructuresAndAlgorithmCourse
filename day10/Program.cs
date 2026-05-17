@@ -38,6 +38,22 @@ namespace day10
     }
     public class Solution
     {
+        public IList<IList<int>> Subsets(int[] nums)
+        {
+            IList<IList<int>> result = new List<IList<int>>();
+            BacktrackSubsets(nums, 0, new List<int>(), result);
+            return result;
+        }
+        private void BacktrackSubsets(int[] nums, int start, List<int> current, IList<IList<int>> result)
+        {
+            result.Add(new List<int>(current));
+            for (int i = start; i < nums.Length; i++)
+            {
+                current.Add(nums[i]);
+                BacktrackSubsets(nums, i + 1, current, result);
+                current.RemoveAt(current.Count - 1);
+            }
+        }
         public IList<IList<int>> Combine(int n, int k)
         {
             IList<IList<int>> result = new List<IList<int>>();
