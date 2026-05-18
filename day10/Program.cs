@@ -38,6 +38,35 @@ namespace day10
     }
     public class Solution
     {
+        public bool Exist(char[][] board, string word)
+        {
+            int m = board.Length, n = board[0].Length;
+            bool[,] visited = new bool[m, n];
+            for (int i = 0; i < m; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    if (BacktrackExist(board, word, 0, i, j, visited))
+                        return true;
+                }
+            }
+            return false;
+        }
+        private void BacktrackExist(char[][] board, string word, int index, int x, int y, bool[,] visited)
+        {
+            if (index == word.Length)
+                return true;
+            if (x < 0 || x >= board.Length || y < 0 || y >= board[0].Length ||
+                visited[x, y] || board[x][y] != word[index])
+                return false;
+            visited[x, y] = true;
+            bool found = BacktrackExist(board, word, index + 1, x + 1, y, visited) ||
+                         BacktrackExist(board, word, index + 1, x - 1, y, visited) ||
+                         BacktrackExist(board, word, index + 1, x, y + 1, visited) ||
+                         BacktrackExist(board, word, index + 1, x, y - 1, visited);
+            visited[x, y] = false;
+            return found;
+        }
         public IList<IList<int>> Subsets(int[] nums)
         {
             IList<IList<int>> result = new List<IList<int>>();
