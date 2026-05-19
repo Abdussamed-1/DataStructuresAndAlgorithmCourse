@@ -38,6 +38,33 @@ namespace day10
     }
     public class Solution
     {
+        public int FindMaxConsecutiveOnes(int[] nums)
+        {
+            int maxCount = 0, count = 0;
+            foreach (int num in nums)
+            {
+                if (num == 1)
+                {
+                    count++;
+                    maxCount = Math.Max(maxCount, count);
+                }
+                else
+                {
+                    count = 0;
+                }
+            }
+            return maxCount;
+        }
+        public int[] Shuffle(int[] nums, int n)
+        {
+            int[] result = new int[2 * n];
+            for (int i = 0; i < n; i++)
+            {
+                result[2 * i] = nums[i];
+                result[2 * i + 1] = nums[i + n];
+            }
+            return result;
+        }
         public int[] GetConcatenation(int[] nums)
         {
             int n = nums.Length;
