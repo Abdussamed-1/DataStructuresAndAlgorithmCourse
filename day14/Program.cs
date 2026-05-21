@@ -1,9 +1,9 @@
 ﻿using System;
 namespace day14
 {
-    class Program
+    public class Program
     {
-        public static void Main(string[] args)
+         static void Main(string[] args)
         {
             Console.WriteLine("Dizi Boyutunu giriniz:");
             int boyut = Convert.ToInt32(Console.ReadLine());

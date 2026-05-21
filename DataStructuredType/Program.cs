@@ -45,4 +45,33 @@ namespace Datastructuredpaths
             return result;
         }
     }
+    public class arrays2 
+    {
+        public int[] FindErrorNums(int[] nums)
+        {
+            int n = nums.Length;
+            int[] result = new int[2];
+            for (int i = 0; i < n; i++)
+            {
+                int index = Math.Abs(nums[i]) - 1;
+                if (nums[index] < 0)
+                {
+                    result[0] = index + 1;
+                }
+                else
+                {
+                    nums[index] = -nums[index];
+                }
+            }
+            for (int i = 0; i < n; i++)
+            {
+                if (nums[i] > 0)
+                {
+                    result[1] = i + 1;
+                    break;
+                }
+            }
+            return result;
+        }
+    }
 }
