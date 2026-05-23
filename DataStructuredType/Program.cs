@@ -118,10 +118,10 @@ namespace Datastructuredpaths
         {
             IList<string> result = new List<string>();
             int j = 0;
-            for (int i = 1; i <= n; i++)
+            for (int i = 1; i <= n && j < target.Length; i++)
             {
                 result.Add("Push");
-                if (j < target.Length && target[j] == i)
+                if (target[j] == i)
                 {
                     j++;
                 }
