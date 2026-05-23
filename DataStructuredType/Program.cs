@@ -113,4 +113,25 @@ namespace Datastructuredpaths
             return result;
         }
     }
+    public class stacks {
+        public IList<string> BuildArray(int[] target, int n)
+        {
+            IList<string> result = new List<string>();
+            int j = 0;
+            for (int i = 1; i <= n; i++)
+            {
+                result.Add("Push");
+                if (j < target.Length && target[j] == i)
+                {
+                    j++;
+                }
+                else
+                {
+                    result.Add("Pop");
+                }
+            }
+            return result;
+
+        }
+    }
 }
