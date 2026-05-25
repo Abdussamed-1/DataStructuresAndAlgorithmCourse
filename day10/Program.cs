@@ -38,6 +38,38 @@ namespace day10
     }
     public class Solution
     {
+        public int RemoveDuplicates(int[] nums)
+        {
+            if (nums.Length <= 2)
+                return nums.Length;
+
+            int write = 2;
+            for (int i = 2; i < nums.Length; i++)
+            {
+                if (nums[i] != nums[write - 2])
+                {
+                    nums[write] = nums[i];
+                    write++;
+                }
+            }
+
+            return write;
+        }
+
+        public int RemoveDuplicatesUnique(int[] nums)
+        {
+            if (nums.Length == 0) return 0;
+            int uniqueCount = 1;
+            for (int i = 1; i < nums.Length; i++)
+            {
+                if (nums[i] != nums[uniqueCount - 1])
+                {
+                    nums[uniqueCount] = nums[i];
+                    uniqueCount++;
+                }
+            }
+            return uniqueCount;
+        }   
         public bool Exist(char[][] board, string word)
         {
             int m = board.Length, n = board[0].Length;
