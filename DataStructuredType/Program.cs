@@ -118,32 +118,32 @@ namespace Datastructuredpaths
         public int[] ExclusiveTime(int n, IList<string> logs)
         {
             int[] result = new int[n];
-            Stack<(int id, int time)> stack = new Stack<(int id, int time)>();
+            Stack<int> stack = new Stack<int>();
+            int prevTime = 0;
+            
             foreach (string log in logs)
             {
                 string[] parts = log.Split(':');
                 int id = int.Parse(parts[0]);
                 string type = parts[1];
                 int time = int.Parse(parts[2]);
+                
                 if (type == "start")
                 {
                     if (stack.Count > 0)
                     {
-                        var (prevId, prevTime) = stack.Peek();
-                        result[prevId] += time - prevTime;
+                        result[stack.Peek()] += time - prevTime;
                     }
-                    stack.Push((id, time));
+                    stack.Push(id);
+                    prevTime = time;
                 }
                 else
                 {
-                    var (prevId, prevTime) = stack.Pop();
-                    result[prevId] += time - prevTime + 1;
-                    if (stack.Count > 0)
-                    {
-                        stack.Push((stack.Peek().id, time + 1));
-                    }
+                    result[stack.Pop()] += time - prevTime + 1;
+                    prevTime = time + 1;
                 }
             }
+            
             return result;
         }
         public IList<string> BuildArray(int[] target, int n)
