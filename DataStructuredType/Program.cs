@@ -198,4 +198,22 @@ namespace Datastructuredpaths
             return stack.Pop();
         }
     }
+    public class monotonicstack {
+        public int[] FinalPrices(int[] prices)
+        {
+            int n = prices.Length;
+            int[] result = new int[n];
+            Stack<int> stack = new Stack<int>();
+            for (int i = n - 1; i >= 0; i--)
+            {
+                while (stack.Count > 0 && stack.Peek() > prices[i])
+                {
+                    stack.Pop();
+                }
+                result[i] = stack.Count == 0 ? prices[i] : prices[i] - stack.Peek();
+                stack.Push(prices[i]);
+            }
+            return result;
+        }
+    }
 }
