@@ -250,4 +250,26 @@ namespace Datastructuredpaths
             return result;
         }
     }
+    public class queue {
+        public int CountStudents(int[] students, int[] sandwiches)
+        {
+            int n = students.Length;
+            int count0 = students.Count(s => s == 0);
+            int count1 = n - count0;
+            foreach (int sandwich in sandwiches)
+            {
+                if (sandwich == 0)
+                {
+                    if (count0 == 0) break;
+                    count0--;
+                }
+                else
+                {
+                    if (count1 == 0) break;
+                    count1--;
+                }
+            }
+            return count0 + count1;
+        }
+    }
 }
