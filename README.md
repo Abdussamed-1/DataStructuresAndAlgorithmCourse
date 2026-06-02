@@ -1,5 +1,6 @@
 # Data Structures And Algorithm Course
 
+
 Purpose
 -------
 This repository is a day-to-day, step-by-step learning log and code collection for studying data structures and algorithms using C#. The goal is to learn concepts, implement them in C#, test them, and document progress. Primary learning resource used throughout is W3Schools (C# reference and tutorials): https://www.w3schools.com/cs/
