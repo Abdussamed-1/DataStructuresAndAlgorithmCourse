@@ -287,6 +287,30 @@ namespace Datastructuredpaths
             }
             return time;
         }
+        public MyQueue()
+        {
+
+        }
+
+        public void Push(int x)
+        {
+
+        }
+
+        public int Pop()
+        {
+
+        }
+
+        public int Peek()
+        {
+
+        }
+
+        public bool Empty()
+        {
+
+        }
     }
 
 }
