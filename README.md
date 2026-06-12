@@ -123,5 +123,6 @@ Next steps you can take
 - Copy this `README.md` into the repository root.
 - Add one sample day folder (e.g., `src/Day01_Basics/`) with code and a `docs/daily-log.md` using the provided template.
 - If you want, I can generate a sample `Day01` implementation and unit tests to get you started.
+- you can contribute
 
 
