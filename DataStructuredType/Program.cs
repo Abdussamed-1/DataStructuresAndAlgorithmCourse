@@ -387,4 +387,22 @@ namespace Datastructuredpaths
 
             return maxArea;
         }
+
+        public bool Exist(char[][] board, string word)
+        {
+            int m = board.Length;
+            int n = board[0].Length;
+            for (int i = 0; i < m; i++)
+            {
+                for (int j = 0; j < n; j++)
+                {
+                    if (DFS(board, word, 0, i, j))
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
+
+        }
     }
