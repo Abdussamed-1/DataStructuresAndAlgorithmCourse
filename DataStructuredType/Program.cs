@@ -403,6 +403,5 @@ namespace Datastructuredpaths
                 }
             }
             return false;
-
         }
     }
