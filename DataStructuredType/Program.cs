@@ -390,18 +390,50 @@ namespace Datastructuredpaths
 
         public bool Exist(char[][] board, string word)
         {
-            int m = board.Length;
-            int n = board[0].Length;
-            for (int i = 0; i < m; i++)
+            int rows = board.Length;
+            int cols = board[0].Length;
+
+            for (int row = 0; row < rows; row++)
             {
-                for (int j = 0; j < n; j++)
+                for (int col = 0; col < cols; col++)
                 {
-                    if (DFS(board, word, 0, i, j))
+                    if (Search(board, word, row, col, 0))
                     {
                         return true;
                     }
                 }
             }
+
             return false;
+        }
+
+        private bool Search(char[][] board, string word, int row, int col, int index)
+        {
+            // Kelimenin tamamı bulundu
+            if (index == word.Length)
+            {
+                return true;
+            }
+
+            // Sınır kontrolü ve karakter eşleşmesi
+            if (row < 0 || row >= board.Length ||
+                col < 0 || col >= board[0].Length ||
+                board[row][col] != word[index])
+            {
+                return false;
+            }
+
+            char currentChar = board[row][col];
+            board[row][col] = '#'; // ziyaret edildi olarak işaretle
+
+            bool exists =
+                Search(board, word, row + 1, col, index + 1) ||
+                Search(board, word, row - 1, col, index + 1) ||
+                Search(board, word, row, col + 1, index + 1) ||
+                Search(board, word, row, col - 1, index + 1);
+
+            board[row][col] = currentChar; // geri al (backtracking)
+
+            return exists;
         }
     }
