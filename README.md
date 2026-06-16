@@ -1,4 +1,4 @@
-# Data Structures And Algorithm Courses
+# Data Structures And Algorithm Course
 
 
 Purpose
