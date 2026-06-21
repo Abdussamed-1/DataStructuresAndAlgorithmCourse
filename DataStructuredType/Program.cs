@@ -484,4 +484,31 @@ namespace Datastructuredpaths
             before.next = afterHead.next; // iki listeyi birleştir
             return beforeHead.next; // yeni baş düğümü döndür
         }
+
+        public bool IsScramble(string s1, string s2)
+        {
+            if (s1.Length != s2.Length) return false;
+            if (s1 == s2) return true;
+            int[] count = new int[26];
+            for (int i = 0; i < s1.Length; i++)
+            {
+                count[s1[i] - 'a']++;
+                count[s2[i] - 'a']--;
+            }
+            foreach (int c in count)
+            {
+                if (c != 0) return false;
+            }
+            for (int i = 1; i < s1.Length; i++)
+            {
+                if ((IsScramble(s1.Substring(0, i), s2.Substring(0, i)) &&
+                     IsScramble(s1.Substring(i), s2.Substring(i))) ||
+                    (IsScramble(s1.Substring(0, i), s2.Substring(s2.Length - i)) &&
+                     IsScramble(s1.Substring(i), s2.Substring(0, s2.Length - i))))
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
     }
