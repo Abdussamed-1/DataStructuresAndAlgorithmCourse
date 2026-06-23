@@ -532,4 +532,15 @@ namespace Datastructuredpaths
                 nums1[k--] = nums2[j--];
             }
         }
+
+        public IList<int> GrayCode(int n)
+        {
+            IList<int> result = new List<int>();
+            int numCodes = 1 << n; // 2^n
+            for (int i = 0; i < numCodes; i++)
+            {
+                result.Add(i ^ (i >> 1)); // Gray code formula
+            }
+            return result;
+        }
     }
