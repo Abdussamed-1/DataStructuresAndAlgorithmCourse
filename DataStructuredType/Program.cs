@@ -45,7 +45,7 @@ namespace Datastructuredpaths
             return result;
         }
     }
-    public class arrays2 
+    public class arrays2
     {
         public IList<int> FindDisappearedNumbers(int[] nums)
         {
@@ -113,21 +113,22 @@ namespace Datastructuredpaths
             return result;
         }
     }
-    public class stacks {
+    public class stacks
+    {
 
         public int[] ExclusiveTime(int n, IList<string> logs)
         {
             int[] result = new int[n];
             Stack<int> stack = new Stack<int>();
             int prevTime = 0;
-            
+
             foreach (string log in logs)
             {
                 string[] parts = log.Split(':');
                 int id = int.Parse(parts[0]);
                 string type = parts[1];
                 int time = int.Parse(parts[2]);
-                
+
                 if (type == "start")
                 {
                     if (stack.Count > 0)
@@ -143,7 +144,7 @@ namespace Datastructuredpaths
                     prevTime = time + 1;
                 }
             }
-            
+
             return result;
         }
         public IList<string> BuildArray(int[] target, int n)
@@ -198,7 +199,8 @@ namespace Datastructuredpaths
             return stack.Pop();
         }
     }
-    public class monotonicstack {
+    public class monotonicstack
+    {
         public int LargestRectangleArea(int[] heights)
         {
             int n = heights.Length;
@@ -250,7 +252,8 @@ namespace Datastructuredpaths
             return result;
         }
     }
-    public class queue {
+    public class queue
+    {
         public int CountStudents(int[] students, int[] sandwiches)
         {
             int n = students.Length;
@@ -543,4 +546,39 @@ namespace Datastructuredpaths
             }
             return result;
         }
+        public IList<IList<int>> SubsetsWithDup(int[] nums)
+        {
+            Array.Sort(nums); // Duplicate değerleri yönetmek için sıralıyoruz
+
+            IList<IList<int>> result = new List<IList<int>>();
+
+            Backtrack(result, new List<int>(), nums, 0);
+
+            return result;
+        }
+
+        private void Backtrack(
+            IList<IList<int>> result,
+            List<int> currentSubset,
+            int[] nums,
+            int startIndex)
+        {
+            result.Add(new List<int>(currentSubset));
+
+            for (int i = startIndex; i < nums.Length; i++)
+            {
+                // Aynı seviyede tekrar eden elemanları atlıyoruz
+                if (i > startIndex && nums[i] == nums[i - 1])
+                {
+                    continue;
+                }
+
+                currentSubset.Add(nums[i]);
+
+                Backtrack(result, currentSubset, nums, i + 1);
+
+                currentSubset.RemoveAt(currentSubset.Count - 1);
+            }
+        }
     }
+}
