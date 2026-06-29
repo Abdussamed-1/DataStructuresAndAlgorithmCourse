@@ -83,4 +83,62 @@ class Program
         }
         return dummy.next;
     }
+    public bool IsScramble(string s1, string s2)
+    {
+        if (s1.Length != s2.Length)
+            return false;
+
+        var memo = new System.Collections.Generic.Dictionary<string, bool>();
+
+        System.Func<string, string, bool> dfs = null;
+        dfs = (a, b) =>
+        {
+            string key = a + "#" + b;
+            if (memo.TryGetValue(key, out bool cached))
+                return cached;
+
+            if (a.Equals(b))
+            {
+                memo[key] = true;
+                return true;
+            }
+
+            int n = a.Length;
+            int[] count = new int[26];
+            for (int i = 0; i < n; i++)
+            {
+                count[a[i] - 'a']++;
+                count[b[i] - 'a']--;
+            }
+            for (int i = 0; i < 26; i++)
+            {
+                if (count[i] != 0)
+                {
+                    memo[key] = false;
+                    return false;
+                }
+            }
+
+            for (int i = 1; i < n; i++)
+            {
+                // no swap
+                if (dfs(a.Substring(0, i), b.Substring(0, i)) && dfs(a.Substring(i), b.Substring(i)))
+                {
+                    memo[key] = true;
+                    return true;
+                }
+                // swap
+                if (dfs(a.Substring(0, i), b.Substring(n - i)) && dfs(a.Substring(i), b.Substring(0, n - i)))
+                {
+                    memo[key] = true;
+                    return true;
+                }
+            }
+
+            memo[key] = false;
+            return false;
+        };
+
+        return dfs(s1, s2);
+    }
 }
