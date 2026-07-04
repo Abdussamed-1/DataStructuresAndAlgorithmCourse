@@ -81,4 +81,59 @@ namespace day14
             }
             return false;
         }
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     public int val;
+ *     public TreeNode left;
+ *     public TreeNode right;
+ *     public TreeNode(int val = 0, TreeNode left = null, TreeNode right = null) {
+ *         this.val = val;
+ *         this.left = left;
+ *         this.right = right;
+ *     }
+ * }
+ */
+        public IList<TreeNode> GenerateTrees(int n)
+        {
+            if (n == 0)
+            {
+                return new List<TreeNode>();
+            }
+
+            return GenerateTreesHelper(1, n);
+        }
+
+        private IList<TreeNode> GenerateTreesHelper(int start, int end)
+        {
+            IList<TreeNode> allTrees = new List<TreeNode>();
+
+            if (start > end)
+            {
+                allTrees.Add(null);
+                return allTrees;
+            }
+
+            for (int rootValue = start; rootValue <= end; rootValue++)
+            {
+                IList<TreeNode> leftTrees = GenerateTreesHelper(start, rootValue - 1);
+                IList<TreeNode> rightTrees = GenerateTreesHelper(rootValue + 1, end);
+
+                foreach (TreeNode leftTree in leftTrees)
+                {
+                    foreach (TreeNode rightTree in rightTrees)
+                    {
+                        TreeNode root = new TreeNode(rootValue);
+
+                        root.left = leftTree;
+                        root.right = rightTree;
+
+                        allTrees.Add(root);
+                    }
+                }
+            }
+
+            return allTrees;
+        }
     }
+}
