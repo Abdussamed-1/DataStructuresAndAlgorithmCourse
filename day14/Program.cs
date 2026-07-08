@@ -135,5 +135,9 @@ namespace day14
 
             return allTrees;
         }
+        public bool IsValidBST(TreeNode root)
+        {   
+            return IsValidBSTHelper(root, long.MinValue, long.MaxValue);
+        }
     }
 }
