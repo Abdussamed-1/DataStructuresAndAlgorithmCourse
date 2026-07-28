@@ -91,6 +91,56 @@ namespace day10
 
             return writeIndex;
         }
+        public bool Search(int[] nums, int target)
+        {
+            int left = 0;
+            int right = nums.Length - 1;
+            while (left <= right)
+            {
+                int mid = left + (right - left) / 2;
+                if (nums[mid] == target)
+                    return true;
+                // Eğer sol taraf sorted ise
+                if (nums[left] < nums[mid])
+                {
+                    if (nums[left] <= target && target < nums[mid])
+                        right = mid - 1;
+                    else
+                        left = mid + 1;
+                }
+                // Eğer sağ taraf sorted ise
+                else if (nums[left] > nums[mid])
+                {
+                    if (nums[mid] < target && target <= nums[right])
+                        left = mid + 1;
+                    else
+                        right = mid - 1;
+                }
+                // Eğer nums[left] == nums[mid], sol tarafı atla
+                else
+                {
+                    left++;
+                }
+            }
+            return false;
+        }
+        public ListNode DeleteDuplicates(ListNode head)
+        {
+            if (head == null) return null;
+            ListNode current = head;
+            while (current != null && current.next != null)
+            {
+                if (current.val == current.next.val)
+                {
+                    current.next = current.next.next; // Duplicate found, skip it
+                }
+                else
+                {
+                    current = current.next; // Move to the next node
+                }
+            }
+            return head;
+        }
         public bool Exist(char[][] board, string word)
         {
             int m = board.Length, n = board[0].Length;
