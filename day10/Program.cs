@@ -69,7 +69,28 @@ namespace day10
                 }
             }
             return uniqueCount;
-        }   
+        }
+
+        public int RemoveDuplicates(int[] nums)
+        {
+            if (nums.Length <= 2)
+                return nums.Length;
+
+            int writeIndex = 2;
+
+            for (int readIndex = 2; readIndex < nums.Length; readIndex++)
+            {
+                // Mevcut sayı, yazma konumundan iki önceki sayıdan farklıysa
+                // en fazla iki kez tekrar ediyor demektir.
+                if (nums[readIndex] != nums[writeIndex - 2])
+                {
+                    nums[writeIndex] = nums[readIndex];
+                    writeIndex++;
+                }
+            }
+
+            return writeIndex;
+        }
         public bool Exist(char[][] board, string word)
         {
             int m = board.Length, n = board[0].Length;
