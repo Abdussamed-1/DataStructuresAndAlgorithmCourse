@@ -1,4 +1,4 @@
-# Data Structures And Algorithm Course
+# Data Structures And Algorithm Courses
 
 
 Purpose of this repository
