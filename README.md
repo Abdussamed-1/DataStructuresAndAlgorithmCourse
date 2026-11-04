@@ -59,7 +59,7 @@ Daily log template (use in `docs/daily-log.md` or each day's folder)
 - Time spent: (e.g., 1.5 hours)
 - Next steps / TODOs
 
-Example daily note
+Example daily notes
 ------------------
 - Date: 2025-12-24
 - Topic: Arrays � Two-sum brute force and hash approach
